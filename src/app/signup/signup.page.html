@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button icon="arrow-round-back" defaultHref="login"></ion-back-button>
+      </ion-buttons>
+    <ion-title>signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <ion-row justify-content-center>
+            <ion-col size="6" size-lg="3">
+              <ion-item>
+                  <ion-input
+                  formControlName="firstName"
+                  required
+                  type="text"
+                  placeholder="First Name"
+                ></ion-input>              
+              </ion-item>
+              <span *ngIf="signupForm.controls['firstName'].hasError('required') && signupForm.controls['firstName'].touched">Field is required</span>
+            </ion-col>
+   
+            <ion-col size="6" size-lg="3">
+              <ion-item>
+                  <ion-input
+                  formControlName="lastName"
+                  required
+                  type="text"
+                  placeholder="Last Name"
+                ></ion-input>
+              </ion-item>
+              <span *ngIf="signupForm.controls['lastName'].hasError('required') && signupForm.controls['lastName'].touched">Field is required</span>
+            </ion-col>
+    
+        </ion-row>
+
+        <ion-row justify-content-center>
+
+            <ion-col size="6" size-lg="3">
+              <ion-item>
+                  <ion-input
+                  formControlName="email"
+                  required
+                  type="email"
+                  placeholder="Your email name"
+                ></ion-input>
+              </ion-item>
+              <span *ngIf="signupForm.controls['email'].hasError('required') && signupForm.controls['email'].touched">Field is required</span>
+              </ion-col>
+    
+            <ion-col size="6" size-lg="3">
+              <ion-item>
+                  <ion-input
+                  formControlName="password"
+                  required
+                  type="password"
+                  placeholder="Password"
+                ></ion-input>
+              </ion-item>
+              <span *ngIf="signupForm.controls['password'].hasError('required') && signupForm.controls['password'].touched">Field is required</span>
+              </ion-col>
+    
+        </ion-row>
+
+        <ion-row justify-content-center>
+            <ion-col size="12" size-lg="6">
+              <ion-button
+              [disabled]="!signupForm.valid"
+              type="submit"
+              size="full">Next</ion-button>
+            </ion-col>
+        </ion-row>        
+      </form>
+<ion-grid>
+
+</ion-grid>
+</ion-content>
