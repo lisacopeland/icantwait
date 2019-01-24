@@ -6,7 +6,6 @@ import { throwError as observableThrowError, Observable, Subject} from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { environment} from '../../../environments/environment';
-import { UserResponse } from '../interfaces/user.interface';
 
 /**
  * Service for Registering, logging in, and logging out users
@@ -29,11 +28,11 @@ export class AuthService {
                 private fbAuth: AngularFireAuth) {
     }
 
-    registerUser(user) {
-        const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-        const body = JSON.stringify(user);
+    registerUser(email, password) {
+/*         const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+        const body = JSON.stringify(authUser);
         const registerUrl = environment.apiUrl + '/register';
-        return this.http.post<UserResponse>(registerUrl, body, { headers: myHeaders })
+        return this.http.post<AuthUserResponse>(registerUrl, body, { headers: myHeaders })
             .pipe(map(data => {
                     localStorage.setItem('userId', data.uid);
                     localStorage.setItem('token', data.customToken);
@@ -42,7 +41,7 @@ export class AuthService {
                     return data;
                 })
             );
-        // return this.fromFirebasePromise(this.fbAuth.auth.createUserWithEmailAndPassword(email, password));
+ */     return this.fromFirebasePromise(this.fbAuth.auth.createUserWithEmailAndPassword(email, password));
     }
 
     /**
