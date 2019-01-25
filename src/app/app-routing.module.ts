@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'start', loadChildren: './start/start.module#StartPageModule' },
   { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
-  { path: 'reset-password', loadChildren: './reset-password/reset-password.module#ResetPasswordPageModule' }
+  { path: 'reset-password', loadChildren: './reset-password/reset-password.module#ResetPasswordPageModule' },
+  { path: 'add-timer', loadChildren: './timers/add-timer/add-timer.module#AddTimerPageModule' }
 ];
 
 @NgModule({

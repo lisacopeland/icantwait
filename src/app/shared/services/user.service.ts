@@ -13,7 +13,7 @@ export class UserService {
 
     constructor(private firestoreService: AngularFirestore) {}
 
-    private currentUser: UserInterface;
+    private currentUser: UserInterfaceWithId;
 
     getUser(id: string) {
         return this.firestoreService.collection('users').doc(id).get();
@@ -29,7 +29,7 @@ export class UserService {
         return this.fromFirebasePromise(this.firestoreService.collection('users').doc(uId).update(user));
     }
 
-    setCurrentUser(user: UserInterface) {
+    setCurrentUser(user: UserInterfaceWithId) {
         this.currentUser = user;
 
     }
