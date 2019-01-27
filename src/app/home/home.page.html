@@ -13,7 +13,13 @@
   <h3>My Current Timers</h3>
 
   <ion-grid>
-    <ion-row *ngFor="let timer of timers">
+    <ion-row *ngFor="let timer of timers | async">
+      <ion-button
+        color="primary"
+        routerLink="/edit-timer/{{timer.id}}"
+      >
+        <ion-icon name="edit"></ion-icon>
+      </ion-button>
       <div>
         {{ timer.name }}
         {{ timer.endDate.toDate() | date:"mediumDate" }}
@@ -22,7 +28,9 @@
     </ion-row>
   </ion-grid>
   <ion-fab vertical="bottom" horizontal="end">
-      <ion-fab-button>
+      <ion-fab-button
+        color="primary"
+        routerLink="/add-timer">
         <ion-icon name="add-circle"></ion-icon>
       </ion-fab-button>
   </ion-fab>

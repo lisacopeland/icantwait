@@ -34,8 +34,8 @@ export class TimerService {
         return this.fromFirebasePromise(this.firestoreService.collection('timers').add(timer));
       }
 
-      updateTimer(timer: TimerInterfaceWithId) {
-        return this.fromFirebasePromise(this.firestoreService.collection('timers').doc(timer.id).update(timer));
+      updateTimer(timer: TimerInterface, id: string) {
+        return this.fromFirebasePromise(this.firestoreService.collection('timers').doc(id).update(timer));
       }
 
       deleteTimer(timer: TimerInterfaceWithId) {

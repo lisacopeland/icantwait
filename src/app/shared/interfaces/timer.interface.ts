@@ -4,6 +4,7 @@ export interface TimerInterface {
     description: string;
     endedMessage: string;
     location: string;
+    startDate: firebase.firestore.Timestamp;
     endDate: firebase.firestore.Timestamp;
     endTime: firebase.firestore.Timestamp;
     units: string;    // Months | Days | Hours

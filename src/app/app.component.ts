@@ -18,11 +18,6 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Manage Timers',
-      url: '/timers',
-      icon: 'timer'
-    },
-    {
       title: 'Settings',
       url: '/settings',
       icon: 'cog'

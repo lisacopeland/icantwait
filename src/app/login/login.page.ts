@@ -32,7 +32,6 @@ export class LoginPage implements OnInit {
   onLogin() {
     this.authService.authenticateUser(this.loginForm.value.email, this.loginForm.value.password)
     .subscribe((data) => {
-        // ToDo: RH:  Refactor to Pipe / Map?
         localStorage.setItem('userId', data.uid);
         this.router.navigate(['/home']);
     }, error1 => {

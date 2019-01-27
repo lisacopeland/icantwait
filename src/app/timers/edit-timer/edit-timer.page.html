@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button icon="arrow-round-back" defaultHref="timers"></ion-back-button>
+      </ion-buttons>
+    <ion-title>Manage Timers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row justify-content-center>
+        <ion-col>
+          <h1>{{ editTitle }}</h1>
+        </ion-col>
+      </ion-row>
+    <form [formGroup]="timerForm" (ngSubmit)="onSubmit()">
+      <ion-grid>
+        <ion-col size="12" size-lg="6">
+          <ion-item>
+            <ion-input formControlName="name" required type="text" placeholder="Name"></ion-input>
+          </ion-item>
+          <span *ngIf="timerForm.controls['name'].hasError('required') && timerForm.controls['name'].touched">Field is required</span>
+        </ion-col>
+        <ion-col size="12" size-lg="6">
+          <ion-item>
+            <ion-input formControlName="description" required type="text" placeholder="Description"></ion-input>
+          </ion-item>
+          <span *ngIf="timerForm.controls['description'].hasError('required') && timerForm.controls['description'].touched">Field is required</span>
+        </ion-col>                   
+        <ion-col size="12" size-lg="6">
+          <ion-item>
+            <ion-input formControlName="endedMessage" required type="text" placeholder="Ended Message"></ion-input>
+          </ion-item>
+          <span *ngIf="timerForm.controls['endedMessage'].hasError('required') && timerForm.controls['endedMessage'].touched">Field is required</span>
+        </ion-col>                   
+        <ion-col size="12" size-lg="6">
+            <ion-item>
+              <ion-input formControlName="location" required type="text" placeholder="Location"></ion-input>
+            </ion-item>
+           <span *ngIf="timerForm.controls['location'].hasError('required') && timerForm.controls['location'].touched">Field is required</span>
+        </ion-col>                   
+    
+        <ion-row justify-content-center>
+            <ion-col size="12" size-lg="6">
+              <ion-button [disabled]="!timerForm.valid || processing" type="submit" size="full">Save</ion-button>
+              <ion-button type="button" routerLink="/home" size="full" fill="clear">Cancel</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </form>
+  </ion-grid>
+</ion-content>

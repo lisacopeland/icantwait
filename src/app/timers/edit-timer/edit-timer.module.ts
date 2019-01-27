@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddTimerPage } from './add-timer.page';
+import { EditTimerPage } from './edit-timer.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AddTimerPage
+    component: EditTimerPage
   }
 ];
 
@@ -18,9 +18,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AddTimerPage]
+  declarations: [EditTimerPage]
 })
-export class AddTimerPageModule {}
+export class EditTimerPageModule {}

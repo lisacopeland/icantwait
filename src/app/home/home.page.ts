@@ -5,6 +5,7 @@ import { UserService } from '../shared/services/user.service';
 import { TimerService } from '../shared/services/timer.service';
 import { UserInterfaceWithId } from '../shared/interfaces/user.interface';
 import { TimerInterfaceWithId } from '../shared/interfaces/timer.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { TimerInterfaceWithId } from '../shared/interfaces/timer.interface';
 export class HomePage implements OnInit {
 
   currentUser: UserInterfaceWithId;
-  timers: TimerInterfaceWithId[];
+  timers: Observable<TimerInterfaceWithId[]>;
   now = Date.now();
 
   constructor(private router: Router,
@@ -27,14 +28,15 @@ export class HomePage implements OnInit {
   }
 
   getTimers() {
-    this.timerService.getTimersByUser(this.currentUser.id)
-      .subscribe((timers) => {
-        this.timers = timers;
-      });
+    this.timers = this.timerService.getTimersByUser(this.currentUser.id);
   }
 
   timeUntil(endDate: firebase.firestore.Timestamp) {
     return endDate.toMillis() - this.now;
+  }
+
+  onEdit() {
+    
   }
 
   onAdd() {
