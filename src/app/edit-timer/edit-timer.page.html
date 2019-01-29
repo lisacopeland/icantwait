@@ -18,29 +18,69 @@
       <ion-grid>
         <ion-col size="12" size-lg="6">
           <ion-item>
+            <ion-label>Name</ion-label>
             <ion-input formControlName="name" required type="text" placeholder="Name"></ion-input>
           </ion-item>
           <span *ngIf="timerForm.controls['name'].hasError('required') && timerForm.controls['name'].touched">Field is required</span>
         </ion-col>
         <ion-col size="12" size-lg="6">
           <ion-item>
+              <ion-label>Description</ion-label>
             <ion-input formControlName="description" required type="text" placeholder="Description"></ion-input>
           </ion-item>
           <span *ngIf="timerForm.controls['description'].hasError('required') && timerForm.controls['description'].touched">Field is required</span>
         </ion-col>                   
         <ion-col size="12" size-lg="6">
           <ion-item>
+            <ion-label>End Message</ion-label>
             <ion-input formControlName="endedMessage" required type="text" placeholder="Ended Message"></ion-input>
           </ion-item>
           <span *ngIf="timerForm.controls['endedMessage'].hasError('required') && timerForm.controls['endedMessage'].touched">Field is required</span>
         </ion-col>                   
         <ion-col size="12" size-lg="6">
             <ion-item>
+              <ion-label>Location</ion-label>
               <ion-input formControlName="location" required type="text" placeholder="Location"></ion-input>
             </ion-item>
            <span *ngIf="timerForm.controls['location'].hasError('required') && timerForm.controls['location'].touched">Field is required</span>
         </ion-col>                   
-    
+        <ion-col size="12" size-lg="6">
+          <ion-item>
+            <ion-label>Start Date</ion-label>
+            <ion-datetime display-format="MMM DD, YYYY" min="2018" max="2030-12-31" formControlName="startDate" type="date" placeholder="Start Date"></ion-datetime>
+          </ion-item>
+        </ion-col>   
+        <ion-col>
+          <ion-item>
+            <ion-label>End Date</ion-label>
+            <ion-datetime display-format="MMM DD, YYYY" min="2018" max="2030-12-31" formControlName="endDate" type="date" placeholder="End Date"></ion-datetime>
+          </ion-item>
+           <span *ngIf="timerForm.controls['endDate'].hasError('required') && timerForm.controls['endDate'].touched">Field is required</span>
+        </ion-col>       
+        <ion-col>
+          <ion-item>
+            <ion-label>End Time</ion-label>
+            <ion-datetime display-format="hh:mm a" formControlName="endTime" type="date" placeholder="End Time"></ion-datetime>
+          </ion-item>
+            <span *ngIf="timerForm.controls['startDate'].hasError('required') && timerForm.controls['startDate'].touched">Field is required</span>
+        </ion-col>         
+        <ion-col>
+          <ion-item>
+            <ion-label>Units</ion-label>
+            <ion-select formControlName="units" placeholder="Units">
+              <ion-select-option *ngFor="let unit of unitChoices" [value]=unit>
+                {{ unit }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>         
+        <ion-col>
+          <ion-item>
+            <ion-label>End at Zero</ion-label>
+            <ion-toggle formControlName="endAtZero">
+            </ion-toggle>
+          </ion-item>
+        </ion-col>  
         <ion-row justify-content-center>
             <ion-col size="12" size-lg="6">
               <ion-button [disabled]="!timerForm.valid || processing" type="submit" size="full">Save</ion-button>

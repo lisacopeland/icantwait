@@ -1,51 +1,66 @@
 <ion-content>
   <ion-grid class="lines">
-    <ion-row justify-content-center>
-      <h1>I Can't Wait!</h1>
-    </ion-row>
+    <ion-row justify-content-center> <h1>I Can't Wait!</h1> </ion-row>
   </ion-grid>
 
   <ion-grid padding>
-      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-    <ion-row justify-content-center>
- 
-        <h1>Login</h1>
- 
-    </ion-row>
-    <ion-row justify-content-center>
-      <ion-col size="12" size-lg="6">
-        <ion-item>
-          <ion-input formControlName="email" required type="text" placeholder="Email"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row justify-content-center>
-      <ion-col size="12" size-lg="6">
-        <ion-item>
-          <ion-input formControlName="password" required type="password"
-          placeholder="Password"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row *ngIf="processing" justify-content-center>
-      <ion-spinner></ion-spinner>
-    </ion-row>
-    <ion-row justify-content-center>
-      <ion-col size="12" size-lg="6">
-        <ion-button [disabled]="(!loginForm.valid) || processing" type="submit" size="full">Login</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row justify-content-center>
-      <ion-col size="12" size-lg="6">
-          <a routerLink="/signup"><ion-button size="full" fill="clear">Create an Account</ion-button></a>
-      </ion-col>
-    </ion-row>
-    <ion-row justify-content-center>
-      <ion-col size="12" size-lg="6">
-        <a routerLink="/reset-password"><ion-button size="full" fill="clear">Forgot Password?</ion-button></a>
-      </ion-col>
-    </ion-row>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <ion-row justify-content-center> <h1>Login</h1> </ion-row>
+      <ion-row justify-content-center>
+        <ion-col size="12" size-lg="6">
+          <ion-item>
+            <ion-input
+              formControlName="email"
+              required
+              type="text"
+              placeholder="Email"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-center>
+        <ion-col size="12" size-lg="6">
+          <ion-item>
+            <ion-input
+              formControlName="password"
+              required
+              type="password"
+              placeholder="Password"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="processing" justify-content-center>
+        <ion-spinner></ion-spinner>
+      </ion-row>
+      <ion-row justify-content-center>
+        <ion-col size="12" size-lg="6">
+          <ion-button
+            [disabled]="!loginForm.valid || processing"
+            type="submit"
+            size="full"
+            >Login</ion-button
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-center>
+        <ion-col size="12" size-lg="6">
+          <a routerLink="/signup"
+            ><ion-button size="full" fill="clear"
+              >Create an Account</ion-button
+            ></a
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-center>
+        <ion-col size="12" size-lg="6">
+          <a routerLink="/reset-password"
+            ><ion-button size="full" fill="clear"
+              >Forgot Password?</ion-button
+            ></a
+          >
+        </ion-col>
+      </ion-row>
     </form>
   </ion-grid>
 </ion-content>
-

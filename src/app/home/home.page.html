@@ -10,8 +10,9 @@
 </ion-header>
 
 <ion-content>
-  <h3>My Current Timers</h3>
-
+  <ion-row justify-content-center>
+    <h3>My Current Timers</h3>
+  </ion-row>
   <ion-grid>
     <ion-row *ngFor="let timer of timers | async">
       <ion-button
@@ -29,7 +30,7 @@
   </ion-grid>
   <ion-fab vertical="bottom" horizontal="end">
       <ion-fab-button
-        color="primary"
+        color="danger"
         routerLink="/add-timer">
         <ion-icon name="add-circle"></ion-icon>
       </ion-fab-button>

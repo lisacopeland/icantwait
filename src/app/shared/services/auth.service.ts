@@ -29,19 +29,7 @@ export class AuthService {
     }
 
     registerUser(email, password) {
-/*         const myHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-        const body = JSON.stringify(authUser);
-        const registerUrl = environment.apiUrl + '/register';
-        return this.http.post<AuthUserResponse>(registerUrl, body, { headers: myHeaders })
-            .pipe(map(data => {
-                    localStorage.setItem('userId', data.uid);
-                    localStorage.setItem('token', data.customToken);
-                    console.log('data from API call is ' + data);
-                    // this.sigininWithCustomToken(data.customToken);
-                    return data;
-                })
-            );
- */     return this.fromFirebasePromise(this.fbAuth.auth.createUserWithEmailAndPassword(email, password));
+      return this.fromFirebasePromise(this.fbAuth.auth.createUserWithEmailAndPassword(email, password));
     }
 
     /**

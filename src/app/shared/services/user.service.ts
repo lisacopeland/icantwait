@@ -15,7 +15,7 @@ export class UserService {
 
     private currentUser: UserInterfaceWithId;
 
-    getUser(id: string) {
+    getUser(id: string): Observable<firebase.firestore.DocumentSnapshot> {
         return this.firestoreService.collection('users').doc(id).get();
     }
 

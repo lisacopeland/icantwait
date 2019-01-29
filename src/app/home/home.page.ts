@@ -6,6 +6,7 @@ import { TimerService } from '../shared/services/timer.service';
 import { UserInterfaceWithId } from '../shared/interfaces/user.interface';
 import { TimerInterfaceWithId } from '../shared/interfaces/timer.interface';
 import { Observable } from 'rxjs';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -21,10 +22,23 @@ export class HomePage implements OnInit {
   constructor(private router: Router,
     private alertCtrl: AlertController,
     private userService: UserService,
+    private authService: AuthService,
     private timerService: TimerService) { }
 
   ngOnInit() {
-    this.currentUser = this.userService.getCurrentUser();
+    if (this.authService.isAuthenticated()) {
+      this.currentUser = this.userService.getCurrentUser();
+      if (!this.currentUser) {
+        const userId = localStorage.getItem('userId');
+        this.userService.getUser(userId)
+          .subscribe(user => {
+              this.currentUser = user.data() as UserInterfaceWithId;
+              this.currentUser.id = user.id;
+              this.userService.setCurrentUser(this.currentUser);
+          });
+      }
+    }
+
   }
 
   getTimers() {
@@ -35,13 +49,4 @@ export class HomePage implements OnInit {
     return endDate.toMillis() - this.now;
   }
 
-  onEdit() {
-    
-  }
-
-  onAdd() {
-    console.log('going to add a timer');
-    this.router.navigateByUrl(this.router.url + '/add-timer/');
-
-  }
 }
