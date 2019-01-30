@@ -9,31 +9,33 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="bg-style">
   <ion-row justify-content-center>
     <h3>My Current Timers</h3>
   </ion-row>
   <ion-grid>
-    <ion-row *ngFor="let timer of timers | async">
-      <ion-button
-        size="small"
-        shape="round"
-        routerLink="/edit-timer/{{timer.id}}"
-      >
-        <ion-icon name="edit"></ion-icon>
-      </ion-button>
-      <div>
+    <ion-card color="light" *ngFor="let timer of timers | async">
+      <ion-row>
         {{ timer.name }}
         {{ timer.endDate.toDate() | date:"mediumDate" }}
         {{ timeUntil(timer.endDate) }}
-      </div>
-    </ion-row>
+      </ion-row>
+      <ion-row align-items-start>
+        <ion-button fill="clear" shape="round" (click)="onDelete(timer)">
+          <ion-icon color="primary" name="trash"></ion-icon>
+        </ion-button>
+         <ion-button fill="clear" shape="round" routerLink="/edit-timer/{{timer.id}}">
+          <ion-icon color="primary" name="create"></ion-icon>
+        </ion-button>
+      </ion-row>
+    </ion-card>
   </ion-grid>
   <ion-fab vertical="bottom" horizontal="end">
       <ion-fab-button
+        size="small"
         color="danger"
         routerLink="/add-timer">
-        <ion-icon name="add-circle"></ion-icon>
+        <ion-icon color="light" name="add-circle"></ion-icon>
       </ion-fab-button>
   </ion-fab>
 </ion-content>

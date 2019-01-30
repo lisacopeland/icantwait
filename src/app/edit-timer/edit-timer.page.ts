@@ -83,8 +83,8 @@ export class EditTimerPage implements OnInit {
     this.timerService.getTimer(this.timerId)
       .subscribe(docSnapShot => {
         this.timer = docSnapShot.data() as TimerInterfaceWithId;
+        this.patchForm(this.timer);
       });
-    this.patchForm(this.timer);
   }
 
   onSubmit() {

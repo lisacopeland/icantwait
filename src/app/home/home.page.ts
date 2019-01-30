@@ -57,4 +57,34 @@ export class HomePage implements OnInit {
     return endDate.toMillis() - this.now;
   }
 
+  async onDelete(timer) {
+     {
+      const alert = await this.alertCtrl.create({
+        header: 'Delete Timer',
+        message: 'Are you sure you want to delete ' + timer.name,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Confirm Cancel');
+            }
+          }, {
+            text: 'Okay',
+            handler: () => {
+              console.log('Confirm Okay');
+              this.timerService.deleteTimer(timer)
+                .subscribe(data => {
+                  // Dont do nuthin
+                },
+                error => {
+                  console.log('Error deleting timer ' + error);
+                });
+            }
+          }
+        ]
+      });
+      await alert.present();
+    }
+  }
 }
