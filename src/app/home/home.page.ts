@@ -7,6 +7,7 @@ import { UserInterfaceWithId } from '../shared/interfaces/user.interface';
 import { TimerInterfaceWithId } from '../shared/interfaces/timer.interface';
 import { Observable } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-home',
@@ -26,18 +27,25 @@ export class HomePage implements OnInit {
     private timerService: TimerService) { }
 
   ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.currentUser = this.userService.getCurrentUser();
-      if (!this.currentUser) {
-        const userId = localStorage.getItem('userId');
-        this.userService.getUser(userId)
-          .subscribe(user => {
-              this.currentUser = user.data() as UserInterfaceWithId;
-              this.currentUser.id = user.id;
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.currentUser = this.userService.getCurrentUser();
+        if (!this.currentUser) {
+          const userId = localStorage.getItem('userId');
+          this.userService.getUser(userId)
+          .subscribe(dbUser => {
+              this.currentUser = dbUser.data() as UserInterfaceWithId;
+              this.currentUser.id = dbUser.id;
               this.userService.setCurrentUser(this.currentUser);
+              this.getTimers();
           });
+        } else {
+          this.getTimers();
+        }
+      } else {
+        this.router.navigate(['/login']);
       }
-    }
+    });
 
   }
 

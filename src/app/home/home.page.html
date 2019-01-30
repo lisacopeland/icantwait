@@ -16,7 +16,8 @@
   <ion-grid>
     <ion-row *ngFor="let timer of timers | async">
       <ion-button
-        color="primary"
+        size="small"
+        shape="round"
         routerLink="/edit-timer/{{timer.id}}"
       >
         <ion-icon name="edit"></ion-icon>

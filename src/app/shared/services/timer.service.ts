@@ -14,12 +14,14 @@ export class TimerService {
     constructor(private firestoreService: AngularFirestore) {}
 
     getTimersByUser(userId): Observable<TimerInterfaceWithId[]> {
+      console.log('UserId is ' + userId);
         return this.firestoreService.collection('timers',
         ref => ref.where('userId', '==', userId))
           .snapshotChanges()
           .pipe(
             map(actions => actions.map(a => {
               const data = a.payload.doc.data() as TimerInterface;
+              console.log('got a timer - it is ' + data);
               const id = a.payload.doc.id;
               return {id, ...data} as TimerInterfaceWithId;
             }))
