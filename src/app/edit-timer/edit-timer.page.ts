@@ -8,7 +8,6 @@ import { User } from 'firebase';
 import { UserInterfaceWithId } from 'src/app/shared/interfaces/user.interface';
 import { TimerInterfaceWithId, TimerInterface } from 'src/app/shared/interfaces/timer.interface';
 import * as firebase from 'firebase';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-edit-timer',

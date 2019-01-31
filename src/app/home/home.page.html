@@ -16,9 +16,7 @@
   <ion-grid>
     <ion-card color="light" *ngFor="let timer of timers | async">
       <ion-row>
-        {{ timer.name }}
-        {{ timer.endDate.toDate() | date:"mediumDate" }}
-        {{ timeUntil(timer.endDate) }}
+        {{ timeUntil(timer) }}
       </ion-row>
       <ion-row align-items-start>
         <ion-button fill="clear" shape="round" (click)="onDelete(timer)">

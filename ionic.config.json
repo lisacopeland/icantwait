@@ -1,5 +1,7 @@
 {
   "name": "icantwait",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

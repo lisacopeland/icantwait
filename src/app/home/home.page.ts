@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import * as firebase from 'firebase';
+import * as moment from 'moment';
+import { AuthService } from '../shared/services/auth.service';
 import { UserService } from '../shared/services/user.service';
 import { TimerService } from '../shared/services/timer.service';
 import { UserInterfaceWithId } from '../shared/interfaces/user.interface';
 import { TimerInterfaceWithId } from '../shared/interfaces/timer.interface';
-import { Observable } from 'rxjs';
-import { AuthService } from '../shared/services/auth.service';
-import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomePage implements OnInit {
 
   currentUser: UserInterfaceWithId;
   timers: Observable<TimerInterfaceWithId[]>;
-  now = Date.now();
+  now = moment();
 
   constructor(private router: Router,
     private alertCtrl: AlertController,
@@ -53,8 +54,28 @@ export class HomePage implements OnInit {
     this.timers = this.timerService.getTimersByUser(this.currentUser.id);
   }
 
-  timeUntil(endDate: firebase.firestore.Timestamp) {
-    return endDate.toMillis() - this.now;
+  timeUntil(timer: TimerInterfaceWithId) {
+
+    // Make sure startDate is not in the future
+    let startDate = moment(timer.startDate.toDate());
+    if (startDate.isBefore(this.now)) {
+      startDate = moment(this.now);
+    }
+    const endDate = moment(timer.endDate.toDate());
+    let returnString = 'There is only ';
+    if (timer.units === 'days') {
+      returnString += endDate.diff(startDate, 'days') + ' days ';
+    } else if (timer.units === 'weeks') {
+      returnString += endDate.diff(startDate, 'weeks') + ' weeks ';
+    } else if (timer.units === 'hours') {
+      returnString += endDate.diff(startDate, 'hours') + ' hours ';
+    } else if (timer.units === 'months') {
+      returnString += endDate.diff(startDate, 'months') + ' months ' ;
+    } else if (timer.units === 'years') {
+      returnString += endDate.diff(startDate, 'years')  + ' years ';
+    }
+    returnString += 'until ' + timer.name;
+    return returnString;
   }
 
   async onDelete(timer) {
