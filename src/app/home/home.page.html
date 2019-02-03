@@ -18,6 +18,9 @@
       <ion-row>
         {{ timeUntil(timer) }}
       </ion-row>
+      <ion-row>
+        <app-progress-bar [value]="75"></app-progress-bar>
+      </ion-row>
       <ion-row align-items-start>
         <ion-button fill="clear" shape="round" (click)="onDelete(timer)">
           <ion-icon color="primary" name="trash"></ion-icon>

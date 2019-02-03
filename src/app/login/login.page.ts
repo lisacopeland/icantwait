@@ -6,6 +6,8 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { UserService } from '../shared/services/user.service';
 import { switchMap, map, mergeMap } from 'rxjs/operators';
 import { UserInterfaceWithId } from '../shared/interfaces/user.interface';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,7 @@ export class LoginPage implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private toastCtrl: ToastController,
+              private facebook: Facebook,
               private userService: UserService,
               private authService: AuthService) { }
 
@@ -57,6 +60,18 @@ export class LoginPage implements OnInit {
             this.presentErrorToast(error.message);
           });
 
+  }
+
+  onFacebook(): Promise<any> {
+    return this.facebook.login(['email'])
+      .then(response => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider
+          .credential(response.authResponse.accessToken);
+        firebase.auth().signInWithCredential(facebookCredential)
+          .then(success => {
+            console.log('Firebase success: ' + JSON.stringify(success));
+          });
+      }).catch((error) => { console.log(error); });
   }
 
   async presentErrorToast(error: string) {
