@@ -14,10 +14,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 @NgModule({
-  declarations: [AppComponent, ProgressBarComponent],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

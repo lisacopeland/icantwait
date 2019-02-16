@@ -1,1 +1,8 @@
-<div [ngStyle]="{'width': value + '%'}" class="bar"></div>
+<div class="bar-border">
+<div [ngStyle]="{'width': percentOfTotal + '%'}" class="bar"></div>
+</div>
+<div class="tick-marks">
+    <div *ngFor="let mark of marks">
+      <div class="tick-mark">{{ mark }}</div>
+    </div>
+</div>

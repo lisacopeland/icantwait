@@ -56,26 +56,42 @@ export class HomePage implements OnInit {
 
   timeUntil(timer: TimerInterfaceWithId) {
 
-    // Make sure startDate is not in the future
+    // If start date is before now, update startDate to now
     let startDate = moment(timer.startDate.toDate());
     if (startDate.isBefore(this.now)) {
       startDate = moment(this.now);
     }
     const endDate = moment(timer.endDate.toDate());
-    let returnString = 'There is only ';
     if (timer.units === 'days') {
-      returnString += endDate.diff(startDate, 'days') + ' days ';
+      return endDate.diff(startDate, 'days');
     } else if (timer.units === 'weeks') {
-      returnString += endDate.diff(startDate, 'weeks') + ' weeks ';
+      return endDate.diff(startDate, 'weeks');
     } else if (timer.units === 'hours') {
-      returnString += endDate.diff(startDate, 'hours') + ' hours ';
+      return endDate.diff(startDate, 'hours');
     } else if (timer.units === 'months') {
-      returnString += endDate.diff(startDate, 'months') + ' months ' ;
+      return endDate.diff(startDate, 'months');
     } else if (timer.units === 'years') {
-      returnString += endDate.diff(startDate, 'years')  + ' years ';
+      return endDate.diff(startDate, 'years');
     }
-    returnString += 'until ' + timer.name;
-    return returnString;
+  }
+
+  totalTime(timer: TimerInterfaceWithId) {
+
+    // This is the time between the start date and end date
+    const startDate = moment(timer.startDate.toDate());
+    const endDate = moment(timer.endDate.toDate());
+    if (timer.units === 'days') {
+      return endDate.diff(startDate, 'days');
+    } else if (timer.units === 'weeks') {
+      return endDate.diff(startDate, 'weeks');
+    } else if (timer.units === 'hours') {
+      return endDate.diff(startDate, 'hours');
+    } else if (timer.units === 'months') {
+      return endDate.diff(startDate, 'months');
+    } else if (timer.units === 'years') {
+      return endDate.diff(startDate, 'years');
+    }
+
   }
 
   async onDelete(timer) {

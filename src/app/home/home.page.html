@@ -15,19 +15,26 @@
   </ion-row>
   <ion-grid>
     <ion-card color="light" *ngFor="let timer of timers | async">
-      <ion-row>
-        {{ timeUntil(timer) }}
-      </ion-row>
-      <ion-row>
-        <app-progress-bar [value]="75"></app-progress-bar>
-      </ion-row>
-      <ion-row align-items-start>
+      <ion-row justify-content-between>
+        <div>
+        End Date: {{ timer.endDate.toDate() | date:"mediumDate" }} 
+        </div>
+        <div>
         <ion-button fill="clear" shape="round" (click)="onDelete(timer)">
-          <ion-icon color="primary" name="trash"></ion-icon>
-        </ion-button>
-         <ion-button fill="clear" shape="round" routerLink="/edit-timer/{{timer.id}}">
-          <ion-icon color="primary" name="create"></ion-icon>
-        </ion-button>
+            <ion-icon color="primary" name="trash"></ion-icon>
+          </ion-button>
+           <ion-button fill="clear" shape="round" routerLink="/edit-timer/{{timer.id}}">
+            <ion-icon color="primary" name="create"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-row>
+      <ion-row>
+        there are only {{ timeUntil(timer) }} {{ timer.units }} until {{ timer.name }}
+      </ion-row>
+      <ion-row>
+        <ion-col class="prog-bar">
+          <app-progress-bar [total]=totalTime(timer) [value]=timeUntil(timer)></app-progress-bar>
+        </ion-col>
       </ion-row>
     </ion-card>
   </ion-grid>
